@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,18 +23,27 @@ import jakarta.persistence.OneToOne;
 public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy hh:mm")
 	private Date instante;
+	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
+	@JsonManagedReference
 	private Pagamento pagamento;
+	
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
+	@JsonManagedReference
 	private Cliente cliente;
+	
 	@ManyToOne
 	@JoinColumn(name = "endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
+	
 	@OneToMany(mappedBy = "id.pedido")
 	private Set<ItemPedido> itens = new HashSet<>();
 

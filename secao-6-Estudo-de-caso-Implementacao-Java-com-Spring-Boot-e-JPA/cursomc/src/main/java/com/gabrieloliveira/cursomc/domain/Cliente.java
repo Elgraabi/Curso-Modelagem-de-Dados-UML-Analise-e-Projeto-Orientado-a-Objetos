@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gabrieloliveira.cursomc.domain.enums.TipoCliente;
 
@@ -38,6 +39,7 @@ public class Cliente implements Serializable {
 	@CollectionTable(name = "telefone")
 	private Set<String> telefones = new HashSet<>();
 	@OneToMany(mappedBy = "cliente")
+	@JsonBackReference
 	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Cliente() {
