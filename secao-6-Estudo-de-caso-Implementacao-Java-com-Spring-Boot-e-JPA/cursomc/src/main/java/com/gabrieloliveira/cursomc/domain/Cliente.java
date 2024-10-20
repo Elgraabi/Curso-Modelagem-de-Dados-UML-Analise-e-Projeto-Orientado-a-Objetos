@@ -37,6 +37,8 @@ public class Cliente implements Serializable {
 	@ElementCollection
 	@CollectionTable(name = "telefone")
 	private Set<String> telefones = new HashSet<>();
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Cliente() {
 		super();
@@ -107,6 +109,10 @@ public class Cliente implements Serializable {
 
 	public List<Endereco> getEnderecos() {
 		return enderecos;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
 	}
 
 	@Override
