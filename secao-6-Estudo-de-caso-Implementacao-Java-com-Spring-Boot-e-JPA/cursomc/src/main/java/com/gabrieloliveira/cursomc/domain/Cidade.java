@@ -3,8 +3,6 @@ package com.gabrieloliveira.cursomc.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,11 +16,13 @@ import jakarta.persistence.Table;
 public class Cidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nome;
-	@JsonManagedReference
+	
 	@ManyToOne
 	@JoinColumn(name = "estado_id")
 	private Estado estado;
